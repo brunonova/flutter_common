@@ -1,0 +1,1 @@
+Common files and utilities for personal Flutter projects.

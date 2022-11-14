@@ -1,0 +1,20 @@
+ok: OK
+cancel: Cancelar
+color:
+  lightGreen: Verde claro
+  green: Verde
+  teal: Verde azulado
+  blue: Azul
+  deepPurple: Roxo profundo
+  purple: Roxo
+  pink: Rosa
+  red: Vermelho
+  orange: Laranja
+  yellow: Amarelo
+aboutInfo:
+  version: Versão
+  developed_by: Desenvolvido por
+  license: Licença
+notFound:
+  title: Página não encontrada!
+  return: Voltar à página inicial

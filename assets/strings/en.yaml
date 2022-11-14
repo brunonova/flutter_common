@@ -1,0 +1,20 @@
+ok: OK
+cancel: Cancel
+color:
+  lightGreen: Light green
+  green: Green
+  teal: Teal
+  blue: Blue
+  deepPurple: Deep purple
+  purple: Purple
+  pink: Pink
+  red: Red
+  orange: Orange
+  yellow: Yellow
+aboutInfo:
+  version: Version
+  developed_by: Deveolped by
+  license: License
+notFound:
+  title: Page not found!
+  return: Return to home page
