@@ -1,6 +1,7 @@
 // Copyright (c) 2022 Bruno Nova - MIT License
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../extensions/build_context.dart';
 import 'drawer.dart';
@@ -20,6 +21,7 @@ class AdaptiveScaffold extends StatelessWidget {
     this.floatingActionButton,
     this.floatingActionButtonLocation,
     this.minExtendedWidth = 256.0,
+    this.backButtonOnlyQuitAtHomePage = true,
     this.buildNavigationRail,
     this.buildDrawer,
     required this.destinations,
@@ -53,6 +55,10 @@ class AdaptiveScaffold extends StatelessWidget {
   /// Minimum width of the [NavigationRail] when extended.
   final double minExtendedWidth;
 
+  /// Whether pressing the back key will only quit the app if at the home page,
+  /// using a [WillPopScope].
+  final bool backButtonOnlyQuitAtHomePage;
+
   /// Optional function to build the [NavigationRail]. If not provided, the
   /// default one will be built.
   final Widget Function(
@@ -71,7 +77,7 @@ class AdaptiveScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final wide = context.mediaQuery.size.width >= breakpoint;
 
-    final tree = Row(
+    Widget tree = Row(
       children: [
         // Navigation rail only on wide screens
         if (wide)
@@ -99,16 +105,32 @@ class AdaptiveScaffold extends StatelessWidget {
       ],
     );
 
+    if (backButtonOnlyQuitAtHomePage) {
+      tree = WillPopScope(
+        onWillPop: () async {
+          if (context.canPop() || context.currentLocation == "/") {
+            return true;
+          } else {
+            // Would quit the app but it's not at the home page, so go back
+            // to the home page
+            context.go("/");
+            return false;
+          }
+        },
+        child: tree,
+      );
+    }
+
     if (title != null && kIsWeb) {
       // Add the title
-      return Title(
+      tree = Title(
         title: title!,
         color: titleColor,
         child: tree,
       );
-    } else {
-      return tree;
     }
+
+    return tree;
   }
 }
 
