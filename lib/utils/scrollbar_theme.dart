@@ -19,7 +19,7 @@ ScrollbarThemeData buildCommonScrollbarTheme(BuildContext context) {
       thumbVisibility: MaterialStateProperty.all(true),
       thickness: MaterialStateProperty.all(4),
       radius: const Radius.circular(4),
-      interactive: true,
+      interactive: false,
     );
   }
 }
