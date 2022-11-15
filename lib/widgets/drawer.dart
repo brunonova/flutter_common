@@ -23,6 +23,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
+        primary: false,
         padding: EdgeInsets.zero,
         children: [
           if (drawerHeader != null) drawerHeader!,

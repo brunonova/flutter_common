@@ -12,6 +12,8 @@ export 'extensions/locale.dart';
 export 'utils/app.dart';
 export 'utils/functions.dart';
 export 'utils/platform_utils.dart';
+export 'utils/scroll_behavior.dart';
+export 'utils/scrollbar_theme.dart';
 export 'utils/yaml_multi_asset_loader.dart';
 export 'widgets/about_info.dart';
 export 'widgets/adaptive_scaffold.dart';
