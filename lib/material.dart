@@ -18,6 +18,7 @@ export 'utils/yaml_multi_asset_loader.dart';
 export 'widgets/about_info.dart';
 export 'widgets/adaptive_scaffold.dart';
 export 'widgets/animated_reorderable_list_view.dart';
+export 'widgets/app_drawer_header.dart';
 export 'widgets/circle_button.dart';
 export 'widgets/error_page.dart';
 export 'widgets/platform_reorderable_drag_start_listener.dart';
