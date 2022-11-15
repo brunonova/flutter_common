@@ -1,4 +1,5 @@
 // Copyright (c) 2022 Bruno Nova - MIT License
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../extensions/build_context.dart';
@@ -24,7 +25,7 @@ class AdaptiveScaffold extends StatelessWidget {
     required this.destinations,
   });
 
-  /// Title of the window (mostly for the web). If given, a [Title] widget will
+  /// Title of the window (for the web). If given, a [Title] widget will
   /// be used.
   final String? title;
 
@@ -98,7 +99,7 @@ class AdaptiveScaffold extends StatelessWidget {
       ],
     );
 
-    if (title != null) {
+    if (title != null && kIsWeb) {
       // Add the title
       return Title(
         title: title!,
