@@ -103,6 +103,9 @@ extension ContextExtension on BuildContext {
       builder: (context) => AlertDialog(
         title: (title != null) ? Text(title) : null,
         insetPadding: CommonConstants.dialogInsetPadding,
+        titlePadding: CommonConstants.dialogTitlePadding,
+        actionsPadding: CommonConstants.dialogActionsPadding,
+        contentPadding: CommonConstants.dialogContentPadding,
         scrollable: scrollable,
         content: scrollable
             ? Text(message)
@@ -138,6 +141,9 @@ extension ContextExtension on BuildContext {
         title: (title != null) ? Text(title) : null,
         scrollable: true,
         insetPadding: CommonConstants.dialogInsetPadding,
+        titlePadding: CommonConstants.dialogTitlePadding,
+        actionsPadding: CommonConstants.dialogActionsPadding,
+        contentPadding: CommonConstants.dialogContentPadding,
         content: scrollable
             ? Text(message)
             : SingleChildScrollView(
@@ -167,6 +173,8 @@ extension ContextExtension on BuildContext {
       builder: (context) => SimpleDialog(
         title: Text(title),
         insetPadding: CommonConstants.dialogInsetPadding,
+        titlePadding: CommonConstants.dialogTitlePadding,
+        contentPadding: CommonConstants.simpleDialogContentPadding,
         children: [
           for (var entry in options.entries)
             SimpleDialogOption(
@@ -190,6 +198,8 @@ extension ContextExtension on BuildContext {
       builder: (context) => SimpleDialog(
         title: Text(title),
         insetPadding: CommonConstants.dialogInsetPadding,
+        titlePadding: CommonConstants.dialogTitlePadding,
+        contentPadding: CommonConstants.simpleDialogContentPadding,
         children: [
           for (var entry in options.entries)
             SimpleDialogOption(

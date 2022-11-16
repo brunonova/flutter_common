@@ -173,6 +173,8 @@ class SettingsTile extends StatelessWidget {
             builder: (context) => SimpleDialog(
               title: Text(dialogTitle),
               insetPadding: CommonConstants.dialogInsetPadding,
+              titlePadding: CommonConstants.dialogTitlePadding,
+              contentPadding: CommonConstants.simpleDialogContentPadding,
               children: [
                 for (var entry in schemesMap.entries)
                   SimpleDialogOption(
