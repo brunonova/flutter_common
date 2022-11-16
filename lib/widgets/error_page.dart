@@ -12,17 +12,23 @@ class ErrorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("notFound.title").tr(),
-            TextButton(
-              onPressed: () => context.go("/"),
-              child: const Text("notFound.return").tr(),
-            ),
-          ],
+    return WillPopScope(
+      onWillPop: () async {
+        context.go("/"); // return to home page
+        return false;
+      },
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("notFound.title").tr(),
+              TextButton(
+                onPressed: () => context.go("/"),
+                child: const Text("notFound.return").tr(),
+              ),
+            ],
+          ),
         ),
       ),
     );
