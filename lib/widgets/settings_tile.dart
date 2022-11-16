@@ -1,6 +1,7 @@
 // Copyright (c) 2022 Bruno Nova - MIT License
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_common/utils/constants.dart';
 
 import '../extensions/build_context.dart';
 import '../extensions/locale.dart';
@@ -171,6 +172,7 @@ class SettingsTile extends StatelessWidget {
             context: context,
             builder: (context) => SimpleDialog(
               title: Text(dialogTitle),
+              insetPadding: CommonConstants.dialogInsetPadding,
               children: [
                 for (var entry in schemesMap.entries)
                   SimpleDialogOption(

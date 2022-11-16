@@ -10,6 +10,7 @@ export 'package:provider/provider.dart';
 export 'extensions/build_context.dart';
 export 'extensions/locale.dart';
 export 'utils/app.dart';
+export 'utils/constants.dart';
 export 'utils/functions.dart';
 export 'utils/platform_utils.dart';
 export 'utils/scroll_behavior.dart';

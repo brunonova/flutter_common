@@ -1,6 +1,7 @@
 // Copyright (c) 2022 Bruno Nova - MIT License
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_common/utils/constants.dart';
 import 'package:go_router/go_router.dart';
 
 /// Adds some useful things to [BuildContext].
@@ -69,8 +70,9 @@ extension ContextExtension on BuildContext {
     void Function()? actionOnPressed,
     int duration = 4,
   }) {
-    scaffoldMessenger
-        .hideCurrentSnackBar(); // dismiss the current snackbar, if any
+    // Dismiss the current snackbar, if any
+    scaffoldMessenger.hideCurrentSnackBar();
+
     SnackBarAction? action;
     if (actionLabel != null && actionOnPressed != null) {
       action = SnackBarAction(
@@ -88,14 +90,25 @@ extension ContextExtension on BuildContext {
 
   /// Shows a simple message dialog with a [message] and an optional [title],
   /// with a single OK button.
-  Future<void> showMessageDialog(String message, {String? title}) async {
+  ///
+  /// If [scrollable] is true, both the title and message together will be
+  /// scrollable, else only the message will be scrollable.
+  Future<void> showMessageDialog(
+    String message, {
+    String? title,
+    bool scrollable = false,
+  }) async {
     await showDialog(
       context: this,
       builder: (context) => AlertDialog(
         title: (title != null) ? Text(title) : null,
-        content: SingleChildScrollView(
-          child: Text(message),
-        ),
+        insetPadding: CommonConstants.dialogInsetPadding,
+        scrollable: scrollable,
+        content: scrollable
+            ? Text(message)
+            : SingleChildScrollView(
+                child: Text(message),
+              ),
         actions: [
           TextButton(
             onPressed: navigator.pop,
@@ -111,14 +124,25 @@ extension ContextExtension on BuildContext {
   ///
   /// Returns a [Future] with true value if the user accepted, or false if the
   /// user canceled.
-  Future<bool> showConfirmDialog(String message, [String? title]) async {
+  ///
+  /// If [scrollable] is true, both the title and message together will be
+  /// scrollable, else only the message will be scrollable.
+  Future<bool> showConfirmDialog(
+    String message, [
+    String? title,
+    bool scrollable = false,
+  ]) async {
     bool? result = await showDialog(
       context: this,
       builder: (context) => AlertDialog(
         title: (title != null) ? Text(title) : null,
-        content: SingleChildScrollView(
-          child: Text(message),
-        ),
+        scrollable: true,
+        insetPadding: CommonConstants.dialogInsetPadding,
+        content: scrollable
+            ? Text(message)
+            : SingleChildScrollView(
+                child: Text(message),
+              ),
         actions: [
           TextButton(
             onPressed: () => navigator.pop(false),
@@ -142,6 +166,7 @@ extension ContextExtension on BuildContext {
       context: this,
       builder: (context) => SimpleDialog(
         title: Text(title),
+        insetPadding: CommonConstants.dialogInsetPadding,
         children: [
           for (var entry in options.entries)
             SimpleDialogOption(
@@ -164,6 +189,7 @@ extension ContextExtension on BuildContext {
       context: this,
       builder: (context) => SimpleDialog(
         title: Text(title),
+        insetPadding: CommonConstants.dialogInsetPadding,
         children: [
           for (var entry in options.entries)
             SimpleDialogOption(
