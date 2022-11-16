@@ -1,4 +1,5 @@
 // Copyright (c) 2022 Bruno Nova - MIT License
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -13,7 +14,7 @@ class AdaptiveScaffold extends StatelessWidget {
   const AdaptiveScaffold({
     super.key,
     this.title,
-    this.titleColor = Colors.white,
+    this.titleColor,
     required this.body,
     this.breakpoint = 700,
     this.appBar,
@@ -31,8 +32,8 @@ class AdaptiveScaffold extends StatelessWidget {
   /// be used.
   final String? title;
 
-  /// Color for the [Title] widget, if the [title] argument is given.
-  final Color titleColor;
+  /// Color for the [Title] widget.
+  final Color? titleColor;
 
   /// Body of the page.
   final Widget body;
@@ -121,14 +122,14 @@ class AdaptiveScaffold extends StatelessWidget {
       );
     }
 
-    if (title != null && kIsWeb) {
-      // Add the title
-      tree = Title(
-        title: title!,
-        color: titleColor,
-        child: tree,
-      );
-    }
+    // Add the title widget
+    tree = Title(
+      // If on web and the title is given, use it. Else use the application name
+      title: (kIsWeb && title != null) ? title! : "appName".tr(),
+      // Title color if given, else use the background color
+      color: titleColor ?? context.theme.scaffoldBackgroundColor,
+      child: tree,
+    );
 
     return tree;
   }
