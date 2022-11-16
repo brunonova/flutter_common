@@ -38,14 +38,17 @@ class _AppNavigationRailState extends State<AppNavigationRail> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) => SingleChildScrollView(
+    return LayoutBuilder(builder: (context, constraints) {
+      var selectedIndex = widget.destinations
+          .indexWhere((element) => element.path == context.currentLocation);
+      if (selectedIndex < 0) selectedIndex = 0;
+
+      return SingleChildScrollView(
         child: ConstrainedBox(
           constraints: BoxConstraints(minHeight: constraints.maxHeight),
           child: IntrinsicHeight(
             child: NavigationRail(
-              selectedIndex: widget.destinations.indexWhere(
-                  (element) => element.path == context.currentLocation),
+              selectedIndex: selectedIndex,
               leading: _ExtendButton(
                 toggleExtended: toggleExtended,
                 extended: _extended,
@@ -66,8 +69,8 @@ class _AppNavigationRailState extends State<AppNavigationRail> {
             ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
 
