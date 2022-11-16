@@ -59,12 +59,7 @@ class _AppNavigationRailState extends State<AppNavigationRail> {
               destinations: [
                 for (var destination in widget.destinations)
                   NavigationRailDestination(
-                    icon: _extended
-                        ? Icon(destination.icon)
-                        : Tooltip(
-                            message: destination.text,
-                            child: Icon(destination.icon),
-                          ),
+                    icon: Icon(destination.icon),
                     label: Text(destination.text),
                   ),
               ],
@@ -99,14 +94,9 @@ class _ExtendButton extends StatelessWidget {
           right: lerpDouble(0, minExtendedWidth - 56.0, animation.value)!,
           top: 4,
         ),
-        child: Tooltip(
-          message: extended
-              ? context.materialLocalizations.closeButtonTooltip
-              : context.materialLocalizations.openAppDrawerTooltip,
-          child: IconButton(
-            onPressed: toggleExtended,
-            icon: const Icon(Icons.menu),
-          ),
+        child: IconButton(
+          onPressed: toggleExtended,
+          icon: const Icon(Icons.menu),
         ),
       ),
     );
