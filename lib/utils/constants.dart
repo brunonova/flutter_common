@@ -24,6 +24,13 @@ class CommonConstants {
   static const dialogContentPadding =
       EdgeInsets.symmetric(horizontal: 24, vertical: 12);
 
+  /// Padding around the content of dialogs (when inside a scroll view).
+  static const dialogContentPaddingWithScroll =
+      EdgeInsets.fromLTRB(24, 12, 0, 12);
+
+  /// Padding around the scroll view of content of dialogs.
+  static const dialogContentScrollPadding = EdgeInsets.only(right: 24);
+
   /// Padding around the content of simple dialogs.
   static const simpleDialogContentPadding =
       EdgeInsets.symmetric(horizontal: 0, vertical: 12);

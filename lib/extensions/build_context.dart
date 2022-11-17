@@ -120,11 +120,14 @@ extension ContextExtension on BuildContext {
             ? CommonConstants.dialogTitlePaddingWithCloseButton
             : CommonConstants.dialogTitlePadding,
         actionsPadding: CommonConstants.dialogActionsPadding,
-        contentPadding: CommonConstants.dialogContentPadding,
+        contentPadding: scrollable
+            ? CommonConstants.dialogContentPadding
+            : CommonConstants.dialogContentPaddingWithScroll,
         scrollable: scrollable,
         content: scrollable
             ? Text(message)
             : SingleChildScrollView(
+                padding: CommonConstants.dialogContentScrollPadding,
                 child: Text(message),
               ),
         actions: [
@@ -171,10 +174,13 @@ extension ContextExtension on BuildContext {
             ? CommonConstants.dialogTitlePaddingWithCloseButton
             : CommonConstants.dialogTitlePadding,
         actionsPadding: CommonConstants.dialogActionsPadding,
-        contentPadding: CommonConstants.dialogContentPadding,
+        contentPadding: scrollable
+            ? CommonConstants.dialogContentPadding
+            : CommonConstants.dialogContentPaddingWithScroll,
         content: scrollable
             ? Text(message)
             : SingleChildScrollView(
+                padding: CommonConstants.dialogContentScrollPadding,
                 child: Text(message),
               ),
         actions: [
