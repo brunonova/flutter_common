@@ -7,7 +7,7 @@ class CommonConstants {
   /// Inset padding of dialogs.
   static const dialogInsetPadding = EdgeInsets.symmetric(
     horizontal: 20,
-    vertical: 5,
+    vertical: 10,
   );
 
   /// Padding around the title of dialogs.
