@@ -9,11 +9,18 @@ import '../utils/app.dart';
 class AboutInfo extends StatefulWidget {
   const AboutInfo({
     super.key,
+    required this.appName,
+    required this.authors,
     this.appIconAssetPath,
     this.appIconSize = 96,
     this.licenseAssetPath,
-    required this.authors,
   });
+
+  /// The name of the application.
+  final String appName;
+
+  /// Name of the author or authors.
+  final List<String> authors;
 
   /// Path to the asset of the icon of the application.
   /// If null, no icon will be shown.
@@ -25,9 +32,6 @@ class AboutInfo extends StatefulWidget {
   /// Path to the asset of the license file.
   /// If null, the license button won't be shown.
   final String? licenseAssetPath;
-
-  /// Name of the author or authors.
-  final List<String> authors;
 
   @override
   State<AboutInfo> createState() => _AboutInfoState();
@@ -51,12 +55,12 @@ class _AboutInfoState extends State<AboutInfo> {
                     height: widget.appIconSize,
                   ),
                 if (widget.appIconAssetPath != null) const SizedBox(height: 20),
-                const Text(
-                  "appName",
-                  style: TextStyle(
+                Text(
+                  widget.appName,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
-                ).tr(),
+                ),
                 Text("${'aboutInfo.version'.tr()}: ${App.packageInfo.version}"),
                 const SizedBox(height: 10),
                 Text("${'aboutInfo.developed_by'.tr()}:"),
@@ -84,7 +88,7 @@ class _AboutInfoState extends State<AboutInfo> {
     if (mounted) {
       context.showMessageDialog(
         licenseText,
-        title: "appName".tr(),
+        title: widget.appName,
       );
     }
   }
