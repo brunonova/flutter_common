@@ -6,27 +6,34 @@ import '../extensions/build_context.dart';
 import '../utils/app.dart';
 
 /// Generic widget to show the content for the about page.
-class AboutInfo extends StatelessWidget {
+class AboutInfo extends StatefulWidget {
   const AboutInfo({
     super.key,
-    this.appIconAssetPath = "assets/images/app_icon.png",
+    this.appIconAssetPath,
     this.appIconSize = 96,
-    this.licenseAssetPath = "assets/license.txt",
+    this.licenseAssetPath,
     required this.authors,
   });
 
   /// Path to the asset of the icon of the application.
-  final String appIconAssetPath;
+  /// If null, no icon will be shown.
+  final String? appIconAssetPath;
 
   /// Size of the icon of the application.
   final double appIconSize;
 
   /// Path to the asset of the license file.
-  final String licenseAssetPath;
+  /// If null, the license button won't be shown.
+  final String? licenseAssetPath;
 
   /// Name of the author or authors.
   final List<String> authors;
 
+  @override
+  State<AboutInfo> createState() => _AboutInfoState();
+}
+
+class _AboutInfoState extends State<AboutInfo> {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -37,12 +44,13 @@ class AboutInfo extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image(
-                  image: AssetImage(appIconAssetPath),
-                  width: appIconSize,
-                  height: appIconSize,
-                ),
-                const SizedBox(height: 20),
+                if (widget.appIconAssetPath != null)
+                  Image(
+                    image: AssetImage(widget.appIconAssetPath!),
+                    width: widget.appIconSize,
+                    height: widget.appIconSize,
+                  ),
+                if (widget.appIconAssetPath != null) const SizedBox(height: 20),
                 const Text(
                   "appName",
                   style: TextStyle(
@@ -53,13 +61,14 @@ class AboutInfo extends StatelessWidget {
                 const SizedBox(height: 10),
                 Text("${'aboutInfo.developed_by'.tr()}:"),
                 Column(
-                  children: [for (var author in authors) Text(author)],
+                  children: [for (var author in widget.authors) Text(author)],
                 ),
-                const SizedBox(height: 10),
-                TextButton(
-                  onPressed: () => _showLicense(context),
-                  child: const Text("aboutInfo.license").tr(),
-                ),
+                if (widget.licenseAssetPath != null) const SizedBox(height: 10),
+                if (widget.licenseAssetPath != null)
+                  TextButton(
+                    onPressed: () => _showLicense(context),
+                    child: const Text("aboutInfo.license").tr(),
+                  ),
               ],
             )
           ],
@@ -70,9 +79,13 @@ class AboutInfo extends StatelessWidget {
 
   /// Show the license dialog.
   Future<void> _showLicense(BuildContext context) async {
-    context.showMessageDialog(
-      await context.assetBundle.loadString(licenseAssetPath),
-      title: "appName".tr(),
-    );
+    String licenseText =
+        await context.assetBundle.loadString(widget.licenseAssetPath!);
+    if (mounted) {
+      context.showMessageDialog(
+        licenseText,
+        title: "appName".tr(),
+      );
+    }
   }
 }
