@@ -13,6 +13,10 @@ class CommonConstants {
   /// Padding around the title of dialogs.
   static const dialogTitlePadding = EdgeInsets.fromLTRB(24, 12, 24, 0);
 
+  /// Padding around the title of dialogs (with close button).
+  static const dialogTitlePaddingWithCloseButton =
+      EdgeInsets.fromLTRB(24, 12, 12, 0);
+
   /// Padding around the actions of dialogs.
   static const dialogActionsPadding = EdgeInsets.fromLTRB(24, 0, 24, 4);
 

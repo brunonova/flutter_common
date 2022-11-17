@@ -1,10 +1,11 @@
 // Copyright (c) 2022 Bruno Nova - MIT License
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_common/utils/constants.dart';
 
 import '../extensions/build_context.dart';
 import '../extensions/locale.dart';
+import '../utils/constants.dart';
+import 'dialog_title_close_button.dart';
 import 'settings_theme.dart';
 
 /// A tile for a setting in a section.
@@ -57,6 +58,8 @@ class SettingsTile extends StatelessWidget {
   /// The [buildChoices] function should return a map where the key is the
   /// display name of the choice and the value is the value that this choice
   /// returns.
+  ///
+  /// Enable [showCloseButton] to show a close button on the dialog.
   static SettingsTile choice<T>({
     Key? key,
     required BuildContext context,
@@ -65,6 +68,7 @@ class SettingsTile extends StatelessWidget {
     Widget? leading,
     Widget? trailing,
     required String dialogTitle,
+    bool showCloseButton = false,
     required Map<String, T> Function() buildChoices,
     required void Function(T choice) onChosen,
   }) =>
@@ -75,8 +79,9 @@ class SettingsTile extends StatelessWidget {
         leading: leading,
         trailing: trailing,
         onPressed: () async {
-          final choice =
-              await context.showOptionsDialog(dialogTitle, buildChoices());
+          final choice = await context.showOptionsDialog(
+              dialogTitle, buildChoices(),
+              showCloseButton: showCloseButton);
           if (choice != null) {
             onChosen(choice);
           }
@@ -89,6 +94,8 @@ class SettingsTile extends StatelessWidget {
   /// Pass the title of the dialog in [dialogTitle], and the callback to execute
   /// when the user selects a locale in [onChosen] (which receives the chosen
   /// locale).
+  ///
+  /// Enable [showCloseButton] to show a close button on the dialog.
   static SettingsTile localeChoice({
     Key? key,
     required BuildContext context,
@@ -96,6 +103,7 @@ class SettingsTile extends StatelessWidget {
     Widget? leading,
     Widget? trailing,
     required String dialogTitle,
+    bool showCloseButton = false,
     required void Function(Locale choice) onChosen,
   }) =>
       SettingsTile.choice<Locale>(
@@ -106,6 +114,7 @@ class SettingsTile extends StatelessWidget {
         leading: leading,
         trailing: trailing,
         dialogTitle: dialogTitle,
+        showCloseButton: showCloseButton,
         buildChoices: () {
           var localeMap = {
             for (Locale locale in context.supportedLocales) locale.name: locale
@@ -139,6 +148,8 @@ class SettingsTile extends StatelessWidget {
   /// "color").
   /// Each color will be translated using
   /// "&lt;translationStringPrefix&gt;.&lt;map key&gt;" as translation key.
+  ///
+  /// Enable [showCloseButton] to show a close button on the dialog.
   static SettingsTile colorSchemeChoice({
     Key? key,
     required BuildContext context,
@@ -147,6 +158,7 @@ class SettingsTile extends StatelessWidget {
     Widget? leading,
     Widget? trailing,
     required String dialogTitle,
+    bool showCloseButton = false,
     required Map<String, MaterialColor> Function() buildChoices,
     required void Function(String choice) onChosen,
     bool displayColorNames = false,
@@ -171,9 +183,14 @@ class SettingsTile extends StatelessWidget {
           final choice = await showDialog(
             context: context,
             builder: (context) => SimpleDialog(
-              title: Text(dialogTitle),
+              title: DialogTitleWithCloseButton(
+                title: Text(dialogTitle),
+                showCloseButton: showCloseButton,
+              ),
               insetPadding: CommonConstants.dialogInsetPadding,
-              titlePadding: CommonConstants.dialogTitlePadding,
+              titlePadding: showCloseButton
+                  ? CommonConstants.dialogTitlePaddingWithCloseButton
+                  : CommonConstants.dialogTitlePadding,
               contentPadding: CommonConstants.simpleDialogContentPadding,
               children: [
                 for (var entry in schemesMap.entries)

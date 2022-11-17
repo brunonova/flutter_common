@@ -1,7 +1,7 @@
 // Copyright (c) 2022 Bruno Nova - MIT License
 import 'package:flutter/material.dart';
-import 'package:flutter_common/utils/functions.dart';
 
+import '../utils/functions.dart';
 import 'platform_reorderable_drag_start_listener.dart';
 
 /// Controller for the [AnimatedReorderableListView].

@@ -1,8 +1,10 @@
 // Copyright (c) 2022 Bruno Nova - MIT License
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_common/utils/constants.dart';
 import 'package:go_router/go_router.dart';
+
+import '../utils/constants.dart';
+import '../widgets/dialog_title_close_button.dart';
 
 /// Adds some useful things to [BuildContext].
 extension ContextExtension on BuildContext {
@@ -91,19 +93,32 @@ extension ContextExtension on BuildContext {
   /// Shows a simple message dialog with a [message] and an optional [title],
   /// with a single OK button.
   ///
+  /// Enable [showCloseButton] to show a close button on the dialog.
+  ///
   /// If [scrollable] is true, both the title and message together will be
   /// scrollable, else only the message will be scrollable.
+  ///
+  /// Be careful when showing a dialog after an await in a [StatelessWidget]!
+  /// It may crash the application.
   Future<void> showMessageDialog(
     String message, {
     String? title,
+    bool showCloseButton = false,
     bool scrollable = false,
   }) async {
     await showDialog(
       context: this,
       builder: (context) => AlertDialog(
-        title: (title != null) ? Text(title) : null,
+        title: (title != null)
+            ? DialogTitleWithCloseButton(
+                title: Text(title),
+                showCloseButton: showCloseButton,
+              )
+            : null,
         insetPadding: CommonConstants.dialogInsetPadding,
-        titlePadding: CommonConstants.dialogTitlePadding,
+        titlePadding: showCloseButton
+            ? CommonConstants.dialogTitlePaddingWithCloseButton
+            : CommonConstants.dialogTitlePadding,
         actionsPadding: CommonConstants.dialogActionsPadding,
         contentPadding: CommonConstants.dialogContentPadding,
         scrollable: scrollable,
@@ -128,20 +143,33 @@ extension ContextExtension on BuildContext {
   /// Returns a [Future] with true value if the user accepted, or false if the
   /// user canceled.
   ///
+  /// Enable [showCloseButton] to show a close button on the dialog.
+  ///
   /// If [scrollable] is true, both the title and message together will be
   /// scrollable, else only the message will be scrollable.
+  ///
+  /// Be careful when showing a dialog after an await in a [StatelessWidget]!
+  /// It may crash the application.
   Future<bool> showConfirmDialog(
     String message, [
     String? title,
+    bool showCloseButton = false,
     bool scrollable = false,
   ]) async {
     bool? result = await showDialog(
       context: this,
       builder: (context) => AlertDialog(
-        title: (title != null) ? Text(title) : null,
+        title: (title != null)
+            ? DialogTitleWithCloseButton(
+                title: Text(title),
+                showCloseButton: showCloseButton,
+              )
+            : null,
         scrollable: true,
         insetPadding: CommonConstants.dialogInsetPadding,
-        titlePadding: CommonConstants.dialogTitlePadding,
+        titlePadding: showCloseButton
+            ? CommonConstants.dialogTitlePaddingWithCloseButton
+            : CommonConstants.dialogTitlePadding,
         actionsPadding: CommonConstants.dialogActionsPadding,
         contentPadding: CommonConstants.dialogContentPadding,
         content: scrollable
@@ -167,13 +195,27 @@ extension ContextExtension on BuildContext {
   /// Shows a dialog that allows the user to pick one of the given [options].
   /// Each entry in the map of [options] has a display name (the key) and a
   /// value.
-  Future<T?> showOptionsDialog<T>(String title, Map<String, T> options) async {
+  ///
+  /// Enable [showCloseButton] to show a close button on the dialog.
+  ///
+  /// Be careful when showing a dialog after an await in a [StatelessWidget]!
+  /// It may crash the application.
+  Future<T?> showOptionsDialog<T>(
+    String title,
+    Map<String, T> options, {
+    bool showCloseButton = false,
+  }) async {
     return await showDialog(
       context: this,
       builder: (context) => SimpleDialog(
-        title: Text(title),
+        title: DialogTitleWithCloseButton(
+          title: Text(title),
+          showCloseButton: showCloseButton,
+        ),
         insetPadding: CommonConstants.dialogInsetPadding,
-        titlePadding: CommonConstants.dialogTitlePadding,
+        titlePadding: showCloseButton
+            ? CommonConstants.dialogTitlePaddingWithCloseButton
+            : CommonConstants.dialogTitlePadding,
         contentPadding: CommonConstants.simpleDialogContentPadding,
         children: [
           for (var entry in options.entries)
@@ -189,16 +231,27 @@ extension ContextExtension on BuildContext {
   /// Shows a simple dialog that allows the user to pick one of the colors
   /// given in [options]. Eacth entry in the map of [options] has a value to
   /// return when selected (the key) and the respective color (the value).
+  ///
+  /// Enable [showCloseButton] to show a close button on the dialog.
+  ///
+  /// Be careful when showing a dialog after an await in a [StatelessWidget]!
+  /// It may crash the application.
   Future<T?> showSimpleColorPickerDialog<T>(
     String title,
-    Map<T, Color> options,
-  ) async {
+    Map<T, Color> options, {
+    bool showCloseButton = false,
+  }) async {
     return await showDialog(
       context: this,
       builder: (context) => SimpleDialog(
-        title: Text(title),
+        title: DialogTitleWithCloseButton(
+          title: Text(title),
+          showCloseButton: showCloseButton,
+        ),
         insetPadding: CommonConstants.dialogInsetPadding,
-        titlePadding: CommonConstants.dialogTitlePadding,
+        titlePadding: showCloseButton
+            ? CommonConstants.dialogTitlePaddingWithCloseButton
+            : CommonConstants.dialogTitlePadding,
         contentPadding: CommonConstants.simpleDialogContentPadding,
         children: [
           for (var entry in options.entries)
