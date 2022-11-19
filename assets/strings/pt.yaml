@@ -1,15 +1,26 @@
 ok: OK
 cancel: Cancelar
 color:
-  lightGreen: Verde claro
-  green: Verde
-  teal: Verde azulado
+  amber: Âmbar
+  black: Preto
   blue: Azul
+  blueGrey: Azul acinzentado
+  brown: Castanho
+  cyan: Ciano
+  deepOrange: Laranja profundo
   deepPurple: Roxo profundo
-  purple: Roxo
-  pink: Rosa
-  red: Vermelho
+  green: Verde
+  grey: Cinzento
+  indigo: Índigo
+  lightBlue: Azul claro
+  lightGreen: Verde claro
+  lime: Lima
   orange: Laranja
+  pink: Rosa
+  purple: Roxo
+  red: Vermelho
+  teal: Verde azulado
+  white: Branco
   yellow: Amarelo
 aboutInfo:
   version: Versão
