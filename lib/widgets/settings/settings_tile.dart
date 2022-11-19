@@ -2,10 +2,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../extensions/build_context.dart';
-import '../extensions/locale.dart';
-import '../utils/constants.dart';
-import 'dialog_title_close_button.dart';
+import '../../extensions/build_context.dart';
+import '../../extensions/locale.dart';
+import '../../utils/constants.dart';
+import '../dialog_title_close_button.dart';
 import 'settings_theme.dart';
 
 /// A tile for a setting in a section.

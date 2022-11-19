@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../extensions/build_context.dart';
+import '../../extensions/build_context.dart';
 import 'adaptive_scaffold.dart';
 
 /// The drawer used by the [AdaptiveScaffold].

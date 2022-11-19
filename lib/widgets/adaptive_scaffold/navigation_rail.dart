@@ -4,8 +4,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../extensions/build_context.dart';
-import '../utils/app.dart';
+import '../../extensions/build_context.dart';
+import '../../utils/app.dart';
 import 'adaptive_scaffold.dart';
 
 /// Navigation rail for the [AdaptiveScaffold].

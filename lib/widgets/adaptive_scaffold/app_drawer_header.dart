@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../extensions/build_context.dart';
+import '../../extensions/build_context.dart';
 
 /// A [DrawerHeader] that shows the application name over a gradient as
 /// background with colors from the current color scheme.

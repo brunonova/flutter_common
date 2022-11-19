@@ -1,9 +1,9 @@
 // Copyright (c) 2022 Bruno Nova - MIT License
 import 'package:flutter/material.dart';
 
-import '../extensions/build_context.dart';
-import 'settings_tile.dart';
+import '../../extensions/build_context.dart';
 import 'settings_theme.dart';
+import 'settings_tile.dart';
 
 /// A section in the settings list.
 class SettingsSection extends StatelessWidget {
