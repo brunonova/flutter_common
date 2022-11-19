@@ -21,6 +21,7 @@ export 'widgets/adaptive_scaffold/adaptive_scaffold.dart';
 export 'widgets/adaptive_scaffold/app_drawer_header.dart';
 export 'widgets/animated_reorderable_list_view.dart';
 export 'widgets/circle_button.dart';
+export 'widgets/common_material_app.dart';
 export 'widgets/dialog_title_close_button.dart';
 export 'widgets/error_page.dart';
 export 'widgets/platform_reorderable_drag_start_listener.dart';

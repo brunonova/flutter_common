@@ -16,6 +16,7 @@ class CommonTheme {
   static ThemeData themeData({
     required BuildContext context,
     required ColorScheme colorScheme,
+    bool useMaterial3 = true,
     AppBarTheme? appBarTheme,
     CardTheme? cardTheme,
     ScrollbarThemeData? scrollbarTheme,
@@ -23,7 +24,7 @@ class CommonTheme {
     SwitchThemeData? switchTheme,
   }) {
     return ThemeData(
-      useMaterial3: true,
+      useMaterial3: useMaterial3,
       brightness: colorScheme.brightness,
       colorScheme: colorScheme,
       appBarTheme: appBarTheme ?? CommonTheme.appBarTheme(colorScheme),
