@@ -11,6 +11,7 @@ class SettingsList extends StatelessWidget {
     required this.sections,
     this.showDividers = true,
     this.padLeft = false,
+    this.showCloseButtonOnDialogs = false,
     this.scrollController,
   });
 
@@ -24,6 +25,9 @@ class SettingsList extends StatelessWidget {
   /// to align them with the Scaffold's title (on small screens.)
   final bool padLeft;
 
+  /// Whether to show a close button on dialogs.
+  final bool showCloseButtonOnDialogs;
+
   /// Optional [ScrollController] for the [ListView].
   final ScrollController? scrollController;
 
@@ -31,6 +35,7 @@ class SettingsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SettingsTheme(
       padLeft: padLeft,
+      showCloseButtonOnDialogs: showCloseButtonOnDialogs,
       child: ListView.builder(
         controller: scrollController,
         itemCount: sections.length,

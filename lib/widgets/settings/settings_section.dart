@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 
 import '../../extensions/build_context.dart';
 import 'settings_theme.dart';
-import 'settings_tile.dart';
+import 'abstract_settings_tile.dart';
 
 /// A section in the settings list.
 class SettingsSection extends StatelessWidget {
-  const SettingsSection({super.key, required this.options, this.title});
+  const SettingsSection({super.key, required this.tiles, this.title});
 
   /// Title of the section.
   final Widget? title;
 
-  /// Options inside this section.
-  final List<SettingsTile> options;
+  /// Settings tiles inside this section.
+  final List<AbstractSettingsTile> tiles;
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +38,8 @@ class SettingsSection extends StatelessWidget {
         ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: options.length,
-          itemBuilder: (context, index) => options[index],
+          itemCount: tiles.length,
+          itemBuilder: (context, index) => tiles[index],
         ),
       ],
     );
