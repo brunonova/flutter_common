@@ -54,6 +54,8 @@ class AnimatedReorderableListView<T> extends StatefulWidget {
     this.buildTransition,
     this.animationDuration = const Duration(milliseconds: 400),
     this.animationCurve = Curves.easeInOut,
+    this.header,
+    this.footer,
     required this.buildItem,
   });
 
@@ -86,6 +88,12 @@ class AnimatedReorderableListView<T> extends StatefulWidget {
 
   /// Curve of the animation.
   final Curve animationCurve;
+
+  /// Widget to show before the list items (not draggable).
+  final Widget? header;
+
+  /// Widget to show after the list items (not draggable).
+  final Widget? footer;
 
   /// Function to call to build the given item at the given index.
   final Widget Function(T item, int index) buildItem;
@@ -147,6 +155,8 @@ class _AnimatedReorderableListViewState<T>
       padding: widget.padding,
       buildDefaultDragHandles: widget.buildDefaultDragHandles,
       onReorder: widget.onReorder,
+      header: widget.header,
+      footer: widget.footer,
       children: children,
     );
   }
