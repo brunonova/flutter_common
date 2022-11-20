@@ -140,6 +140,9 @@ class _AnimatedReorderableListViewState<T>
         // No drag handles: add the child to a
         // PlatformReorderableDragStartListener.
         child = PlatformReorderableDragStartListener(
+          // No dragging if there's only 1 item in the list (to avoid a weird
+          // animation)
+          enabled: widget.controller.items.length > 1,
           index: i,
           key: child.key,
           child: child,
